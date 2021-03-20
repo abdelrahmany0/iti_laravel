@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PostsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,5 +19,7 @@ Route::get('/', function () {
 
 
 Route::get('/posts', function () {
-    return "hello";
+    return view('posts.showAll');
 });
+
+Route::get('/posts' , [PostsController::class, 'index'])->name('posts.index');
