@@ -12,17 +12,20 @@
             </tr>
         </thead>
         <tbody>
+            @foreach ($posts as $post)
             <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>test</td>
+                {{-- @dd($postq); --}}
+                <td>{{ $post['id'] }}</td>
+                <td>{{ $post['title'] }}</td>
+                <td>{{ $post['posted_by'] }}</td>
+                <td>{{ $post['created_at'] }}</td>
                 <td>
-                    <button type="button" class="btn btn-success">View</button>
-                    <button type="button" class="btn btn-secondary">Edit</button>
-                    <button type="button" class="btn btn-danger">Delete</button>
+                    <a href="/posts{{ $post['id'] }}" class="btn btn-success">View</a>
+                    <a class="btn btn-secondary">Edit</a>
+                    <a class="btn btn-danger">Delete</a>
                 </td>
             </tr>
+            @endforeach
         </tbody>
     </table>
 </div>

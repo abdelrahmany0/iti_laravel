@@ -18,8 +18,5 @@ Route::get('/', function () {
 });
 
 
-Route::get('/posts', function () {
-    return view('posts.showAll');
-});
-
 Route::get('/posts' , [PostsController::class, 'index'])->name('posts.index');
+
