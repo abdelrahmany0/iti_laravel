@@ -20,9 +20,9 @@
             <td>{{ $post['posted_by'] }}</td>
             <td>{{ $post['created_at'] }}</td>
             <td>
-                <a href="{{ route('posts.show',[$post['id'] ]) }}" class="btn btn-success">View</a>
-                <a class="btn btn-secondary">Edit</a>
-                <a class="btn btn-danger">Delete</a>
+                <x-Button type="success" content="View" href="{{ $post['id'] }}"></x-Button>
+                <x-Button type="secondary" content="Edit"></x-Button>
+                <x-Button type="danger" content="Delete"></x-Button>
             </td>
         </tr>
         @endforeach
