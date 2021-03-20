@@ -4,6 +4,7 @@
     <div class="card">
         <div class="card-header">
             <h6>Post Info</h6>
+            <h6>Post ID:{{ $post['id'] }}</h6>
         </div>
         <div class="card-body">
             <h5 class="card-title text-bold">Title:</h5>

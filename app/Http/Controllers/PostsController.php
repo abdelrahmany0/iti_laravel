@@ -18,11 +18,19 @@ class PostsController extends Controller
         ]);
     }
 
-    public function show_post(){
-        $post = ['id' => 1, 'title' => 'laravel', 'description' => 'laravel is awsome framework', 'posted_by' => 'Ahmed', 'created_at' => '2021-03-20'];
+    public function show_post($post_id){
+        $post = ['id' => $post_id, 'title' => 'laravel', 'description' => 'laravel is awesome framework', 'posted_by' => 'Ahmed', 'created_at' => '2021-03-20'];
 
         return view('posts.showPost',[
             'post' => $post
         ]);
+    }
+
+    public function create(){
+        return view('posts.create');
+    }
+
+    public function store(){
+        return redirect()->route('posts.index');
     }
 }
