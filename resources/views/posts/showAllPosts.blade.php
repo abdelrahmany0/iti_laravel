@@ -20,9 +20,9 @@
             <td>{{ $post['posted_by'] }}</td>
             <td>{{ $post['created_at'] }}</td>
             <td>
-                <x-Button type="success" content="View" href="{{ $post['id'] }}"></x-Button>
-                <x-Button type="secondary" content="Edit"></x-Button>
-                <x-Button type="danger" content="Delete"></x-Button>
+                <x-Button type="success" href="{{ $post['id'] }}">View</x-Button>
+                <x-Button type="secondary">Edit</x-Button>
+                <x-Button type="danger">Delete</x-Button>
             </td>
         </tr>
         @endforeach

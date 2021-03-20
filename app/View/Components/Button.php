@@ -14,11 +14,10 @@ class Button extends Component
     private $type;
     private $content;
     private $href;
-    public function __construct($type ,$content ,$href = null)
+    public function __construct($type ,$href = null)
     {
         // var_dump($type);
         $this->type = $type;
-        $this->content = $content;
         if($href != null){
             $this->href = $href;
         }
@@ -34,16 +33,12 @@ class Button extends Component
             return view('components.button',
             [
                 'type' => $this->type,
-                'content' => $this->content,
                 'href' => $this->href
             ]);
-        } else {
-            return view('components.button',
+        }
+        return view('components.button',
         [
             'type' => $this->type,
-            'content' => $this->content
         ]);
-        }
-        
     }
 }
