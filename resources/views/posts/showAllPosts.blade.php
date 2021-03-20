@@ -1,7 +1,7 @@
 @extends('templates.app')
 @section('content')  
-<div class="container">
-    <table class="table table-dark mt-4 brounded">
+<div class="container  mt-4">
+    <table class="table table-dark rounded">
         <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -14,13 +14,12 @@
         <tbody>
             @foreach ($posts as $post)
             <tr>
-                {{-- @dd($postq); --}}
                 <td>{{ $post['id'] }}</td>
                 <td>{{ $post['title'] }}</td>
                 <td>{{ $post['posted_by'] }}</td>
                 <td>{{ $post['created_at'] }}</td>
                 <td>
-                    <a href="/posts{{ $post['id'] }}" class="btn btn-success">View</a>
+                    <a href="/posts/{{ $post['id'] }}" class="btn btn-success">View</a>
                     <a class="btn btn-secondary">Edit</a>
                     <a class="btn btn-danger">Delete</a>
                 </td>

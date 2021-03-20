@@ -19,4 +19,4 @@ Route::get('/', function () {
 
 
 Route::get('/posts' , [PostsController::class, 'index'])->name('posts.index');
-
+Route::get('/posts/{post}' , [PostsController::class, 'show_post'])->name('posts.show');
