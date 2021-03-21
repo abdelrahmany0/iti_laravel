@@ -14,6 +14,7 @@ show post
                 <h5 class="card-title text-bold">Title:-</h5>
                 <p class="inline">{{ $post['title'] }}</p>
             </div>
+            $carbon = new Carbon();  
             <h4 class="card-title">Description:</h4>
             <p class="card-text">{{ $post['description'] }}</p>
             <div class="d-flex align-items-center">
