@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -11,7 +12,6 @@ class PostsController extends Controller
     public function index(){
         //old way
         // $allPosts = Post::all();
-
         return view('posts.showAllPosts',
         [
             //new way get the posts from model querying the database directly 
@@ -21,11 +21,10 @@ class PostsController extends Controller
 
     public function show_post($post_id){
         //old way
-        // $post = Post::find($post_id);
-
+        // $post = Post::find($post_id); 
         return view('posts.showPost',
         [
-            'post' => Post::find($post_id)
+            'post' => Post::find($post_id),
         ]);
     }
 

@@ -20,7 +20,7 @@ all posts
             <td>{{ $post['id'] }}</td>
             <td>{{ $post['title'] }}</td>
             <td>{{ $post->user ? $post->user->name : 'user not found' }}</td>
-            <td>{{ $post['created_at'] }}</td>
+            <td>{{ $post['created_at']->format("Y-m-d") }}</td>
             <td>
                 <x-Button type="info" href="{{ $post['id'] }}">View</x-Button>
                 <x-Button type="secondary">Edit</x-Button>
