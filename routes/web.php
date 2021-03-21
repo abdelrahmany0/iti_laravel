@@ -25,3 +25,4 @@ Route::get('/posts/{post}' , [PostsController::class, 'show_post'])->name('posts
 Route::get('/posts/{post}/edit' , [PostsController::class, 'edit'])->name('posts.edit');
 Route::put('/posts/{post}' , [PostsController::class, 'update'])->name('posts.update');
 Route::delete('/posts/{post}' , [PostsController::class, 'destroy'])->name('posts.destroy');
+Route::post('/posts/{post}' , [PostsController::class, 'restore'])->name('posts.restore');

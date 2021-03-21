@@ -14,7 +14,7 @@ class PostsController extends Controller
         return view('posts.index',
         [
             //new way get the posts from model querying the database directly 
-            'posts' => Post::all()->sortBy('id',-1,$descending = true)
+            'posts' => Post::withTrashed()->get()->sortBy('id',-1,$descending = true)
         ]);
     }
 
@@ -60,4 +60,18 @@ class PostsController extends Controller
             return redirect()->route('posts.index');
     }
 
+    public function destroy($post_id){
+        // dd($post_id);
+        $post = Post::find($post_id);
+        $post->delete();
+        return redirect()->route('posts.index');
+    }
+
+    public function restore($post_id){
+        // dd($post_id);
+        Post::withTrashed()
+        ->where('id', $post_id)
+        ->restore();
+        return redirect()->route('posts.index');
+    }
 }
