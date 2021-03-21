@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -12,10 +11,10 @@ class PostsController extends Controller
     public function index(){
         //old way
         // $allPosts = Post::all();
-        return view('posts.showAllPosts',
+        return view('posts.index',
         [
             //new way get the posts from model querying the database directly 
-            'posts' => Post::all()->sortBy('created_at',-1,$descending = true)
+            'posts' => Post::all()->sortBy('id',-1,$descending = true)
         ]);
     }
 
@@ -40,4 +39,25 @@ class PostsController extends Controller
         Post::create($requestData);
         return redirect()->route('posts.index');
     }
+
+    public function edit($post){
+        // dd($request);
+        return view('posts.editPost',
+        [
+            'post'  => Post::find($post),
+            'users' => User::all()
+        ]);
+    }
+
+    public function update(Request $request ,$post_id){
+        // dd($request);
+        Post::where('id', $post_id)
+        ->update([
+            'title'         => $request['title'],
+            'description'   => $request['description'],
+            'user_id'       => $request['user_id'],
+            ]);
+            return redirect()->route('posts.index');
+    }
+
 }
