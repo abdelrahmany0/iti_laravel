@@ -1,4 +1,7 @@
 @extends('templates.app')
+@section('title')
+show post
+@endsection
 @section('content')  
 <div class="container mt-4">
     <div class="card">

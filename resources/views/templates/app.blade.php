@@ -10,7 +10,7 @@
             background-color: #AAA;
         }
     </style>
-    <title>Document</title>
+    <title>@yield('title')</title>
 </head>
 <body>
     <nav class="navbar navbar-dark bg-dark">

@@ -1,5 +1,7 @@
 @extends('templates.app')
-
+@section('title')
+create post
+@endsection
 @section('content') 
 <form method="POST" action="{{ route('posts.store') }}">
     @csrf

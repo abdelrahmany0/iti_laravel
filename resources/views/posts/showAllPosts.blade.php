@@ -1,5 +1,7 @@
 @extends('templates.app')
-
+@section('title')
+all posts
+@endsection
 @section('content')  
 <a href="{{ route('posts.create') }}" class="btn btn-success mb-2">Create Post</a>
 <table class="table table-dark rounded">
