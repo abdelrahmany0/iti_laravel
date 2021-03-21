@@ -17,7 +17,7 @@
         <tr>
             <td>{{ $post['id'] }}</td>
             <td>{{ $post['title'] }}</td>
-            <td>{{ $post['posted_by'] }}</td>
+            <td>{{ $post->user ? $post->user->name : 'user not found' }}</td>
             <td>{{ $post['created_at'] }}</td>
             <td>
                 <x-Button type="info" href="{{ $post['id'] }}">View</x-Button>

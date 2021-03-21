@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -14,29 +15,30 @@ class PostsController extends Controller
         return view('posts.showAllPosts',
         [
             //new way get the posts from model querying the database directly 
-            'posts' => Post::all()
+            'posts' => Post::all()->sortBy('created_at',-1,$descending = true)
         ]);
     }
 
     public function show_post($post_id){
-        $post = [
-            'id' => $post_id, 
-            'title' => 'laravel', 
-            'description' => 'laravel is awesome framework', 
-            'posted_by' => 'Ahmed', 
-            'created_at' => '2021-03-20'];
+        //old way
+        // $post = Post::find($post_id);
 
         return view('posts.showPost',
         [
-            'post' => $post
+            'post' => Post::find($post_id)
         ]);
     }
 
     public function create(){
-        return view('posts.create');
+        return view('posts.create',[
+            'users' => User::all()
+        ]);
     }
 
-    public function store(){
+    public function store(Request $request){
+        $requestData = $request->all();
+        // dd($requestData);
+        Post::create($requestData);
         return redirect()->route('posts.index');
     }
 }
