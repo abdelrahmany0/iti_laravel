@@ -13,13 +13,10 @@ class Button extends Component
      */
     private $type;
     private $href;
-    public function __construct($type ,$href = null)
+    public function __construct($type ,$href = '#')
     {
-        // var_dump($type);
         $this->type = $type;
-        if($href != null){
-            $this->href = $href;
-        }
+        $this->href = $href;
     }
     /**
      * Get the view / contents that represent the component.
