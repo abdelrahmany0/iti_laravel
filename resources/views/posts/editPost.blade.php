@@ -1,4 +1,4 @@
-@extends('templates.app')
+@extends('layouts.app')
 @section('title')
 edit post
 @endsection

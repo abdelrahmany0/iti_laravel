@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,9 +15,7 @@ use App\Http\Controllers\PostsController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function () {return view('welcome');});
 
 
 Route::get('/posts' , [PostsController::class, 'index'])->name('posts.index');
@@ -26,3 +26,6 @@ Route::get('/posts/{post}/edit' , [PostsController::class, 'edit'])->name('posts
 Route::put('/posts/{post}' , [PostsController::class, 'update'])->name('posts.update');
 Route::delete('/posts/{post}' , [PostsController::class, 'destroy'])->name('posts.destroy');
 Route::post('/posts/{post}' , [PostsController::class, 'restore'])->name('posts.restore');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
