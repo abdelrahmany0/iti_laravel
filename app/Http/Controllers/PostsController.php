@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class PostsController extends Controller
 {
@@ -34,26 +35,36 @@ class PostsController extends Controller
     }
 
     public function store(Request $request){
+        $request->validate([
+            'title'         => ['required' ,'min:3' ,'unique:posts'],
+            'description'   => ['required' ,'min:5']
+        ]);
         $requestData = $request->all();
         // dd($requestData);
         Post::create($requestData);
         return redirect()->route('posts.index');
     }
 
-    public function edit($post){
+    public function edit($post_id){
         // dd($request);
-        $user_post = Post::find($post);
+        $user_post = Post::find($post_id);
         $post_user_id = $user_post->user_id;
         return view('posts.editPost',
         [
-            'post'  => Post::find($post),
+            'post'  => Post::find($post_id),
             'user'  => User::find($post_user_id),
             'users' => User::all()
         ]);
     }
 
     public function update(Request $request ,$post_id){
-        // dd($request);
+        // dd($post_id);
+        $request->validate([
+            'title'         => ['required' ,'min:3' ],
+            Rule::unique('posts')->ignore(Post::find($post_id)->title),
+            'description'   => ['required' ,'min:5']
+        ]);
+        
         Post::where('id', $post_id)
         ->update([
             'title'         => $request['title'],

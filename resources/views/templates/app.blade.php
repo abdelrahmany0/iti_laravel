@@ -14,7 +14,7 @@
 </head>
 <body>
     <nav class="navbar navbar-dark bg-dark">
-        <a href="{{ route('posts.index') }}" class="navbar-brand">All posts</a>
+        <a href="{{ route('posts.index') }}" class="navbar-brand bg-secondary p-2 rounded-lg">All posts</a>
     </nav>
     <div class="container mt-4">
         @yield('content')
