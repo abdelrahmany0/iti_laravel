@@ -16,11 +16,11 @@ edit post
     </div>
     <label>Post Creator:</label>
     <select name="user_id" class="form-control">
-        @foreach ($users as $userr)
-        @if ($userr['name'] === $user->name)
-        <option selected value="{{ $user['id'] }}">{{ $userr['name'] }}</option>
+        @foreach ($users as $one)
+        @if ($one['name'] === $user->name)
+        <option selected value="{{ $user['id'] }}">{{ $one['name'] }}</option>
         @else
-        <option value="{{ $user['id'] }}">{{ $userr['name'] }}</option>
+        <option value="{{ $user['id'] }}">{{ $one['name'] }}</option>
         @endif
         @endforeach
     </select>

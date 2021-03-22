@@ -11,11 +11,10 @@ class PostsController extends Controller
     public function index(){
         //old way
         // $allPosts = Post::all();
-        // dd($allPosts);
         return view('posts.index',
         [
             //new way get the posts from model querying the database directly 
-            'posts' => Post::withTrashed()->paginate(5)
+            'posts' => Post::withTrashed()->orderBy('id','desc')->paginate(5)
         ]);
     }
 

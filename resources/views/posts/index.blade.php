@@ -42,5 +42,5 @@ all posts
         @endforeach
     </tbody>
 </table>
-{{ $posts->onEachSide(5)->links() }}
+{{ $posts->onEachSide(1)->links() }}
 @endsection
