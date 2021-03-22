@@ -61,7 +61,7 @@ class PostsController extends Controller
         $post = Post::find($post_id);
         // dd($post_id);
         $request->validate([
-            'title'         => ['required' ,'min:3', 'unique:posts,'.$post->id],
+            'title'         => ['required' ,'min:3', 'unique:posts,title,'.$post->id],
             'description'   => ['required' ,'min:5']
         ]);
         
