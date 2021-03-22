@@ -4,7 +4,6 @@ show post
 @endsection
 <link rel="stylesheet" type="text/css" href="{{ url('/css/showPost.css') }}">
 <script type="text/javascript" src="{{ URL::asset('js/showPost.js') }}"></script>
-
 @section('content')  
 <div class="container mt-4">
     <div class="card">
@@ -42,5 +41,4 @@ show post
             </div>
     </div>
 </div>
-<x-test></x-test>
 @endsection

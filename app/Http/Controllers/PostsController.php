@@ -11,16 +11,17 @@ class PostsController extends Controller
     public function index(){
         //old way
         // $allPosts = Post::all();
+        // dd($allPosts);
         return view('posts.index',
         [
             //new way get the posts from model querying the database directly 
-            'posts' => Post::withTrashed()->get()->sortBy('id',-1,$descending = true)
+            'posts' => Post::withTrashed()->paginate(5)
         ]);
     }
 
     public function show_post($post_id){
         //old way
-        // $post = Post::find($post_id); 
+        // $post = Post::find($post_id);
         return view('posts.showPost',
         [
             'post' => Post::find($post_id),
@@ -42,9 +43,12 @@ class PostsController extends Controller
 
     public function edit($post){
         // dd($request);
+        $user_post = Post::find($post);
+        $post_user_id = $user_post->user_id;
         return view('posts.editPost',
         [
             'post'  => Post::find($post),
+            'user'  => User::find($post_user_id),
             'users' => User::all()
         ]);
     }

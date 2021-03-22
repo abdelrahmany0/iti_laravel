@@ -3,7 +3,7 @@
 edit post
 @endsection
 @section('content')
-<form method="POST" action="{{ route('posts.update',[$post['id']]) }}">
+<form method="POST" action="{{ route('posts.update',[$post->id]) }}">
     <input type="hidden" name="_method" value="PUT" />
     @csrf
     <div class="form-group">
@@ -16,8 +16,12 @@ edit post
     </div>
     <label>Post Creator:</label>
     <select name="user_id" class="form-control">
-        @foreach ($users as $user)
-        <option value="{{ $user['id'] }}">{{ $user['name'] }}</option>
+        @foreach ($users as $userr)
+        @if ($userr['name'] === $user->name)
+        <option selected value="{{ $user['id'] }}">{{ $userr['name'] }}</option>
+        @else
+        <option value="{{ $user['id'] }}">{{ $userr['name'] }}</option>
+        @endif
         @endforeach
     </select>
     <button type="submit" class="btn btn-primary mt-2">Update</button>
