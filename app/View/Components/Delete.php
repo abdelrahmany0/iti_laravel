@@ -4,16 +4,17 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class Test extends Component
+class Delete extends Component
 {
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    private $action;
+    public function __construct($action)
     {
-        //
+        $this->action = $action;
     }
 
     /**
@@ -23,6 +24,8 @@ class Test extends Component
      */
     public function render()
     {
-        return view('components.test');
+        return view('components.delete',[
+            'action' => $this->action
+        ]);
     }
 }

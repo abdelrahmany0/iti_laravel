@@ -31,13 +31,11 @@ all posts
                     <button class="btn btn-success" type="submit">Restore</button>
                 </form>
                 @else
-                <form class="d-inline" method="POST" action="{{ route('posts.destroy',[$post['id']]) }}">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-danger" type="submit">Delete</button>
-                </form>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                    Delete
+                </button>
+                <x-delete action="{{ route('posts.destroy',[$post['id']]) }}"></x-delete>
                 @endif
-
             </td>
         </tr>
         @endforeach
