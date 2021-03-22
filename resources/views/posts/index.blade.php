@@ -11,6 +11,7 @@ all posts
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Title</th>
+            <th scope="col">Slug</th>
             <th scope="col">Posted By</th>
             <th scope="col">Created At</th>
             <th scope="col">Actions</th>
@@ -21,6 +22,7 @@ all posts
         <tr>
             <td>{{ $post->id }}</td>
             <td>{{ $post->title }}</td>
+            <td>{{ $post->slug }}</td>
             <td>{{ $post->user ? $post->user->name : 'user not found' }}</td>
             <td>{{ $post->created_at->format("Y-m-d") }}</td>
             <td>
