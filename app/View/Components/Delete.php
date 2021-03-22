@@ -12,9 +12,11 @@ class Delete extends Component
      * @return void
      */
     private $action;
-    public function __construct($action)
+    private $id;
+    public function __construct($action  ,$id)
     {
         $this->action = $action;
+        $this->id = $id;
     }
 
     /**
@@ -25,7 +27,8 @@ class Delete extends Component
     public function render()
     {
         return view('components.delete',[
-            'action' => $this->action
+            'action' => $this->action,
+            'id' => $this->id,
         ]);
     }
 }

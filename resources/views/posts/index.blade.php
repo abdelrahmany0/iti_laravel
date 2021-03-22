@@ -32,10 +32,7 @@ all posts
                 @else
                 <x-Button type="info"       href="{{ route('posts.show',[$post->id]) }}">View</x-Button>
                 <x-Button type="secondary"  href="{{ route('posts.edit',[$post->id]) }}">Edit</x-Button>
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
-                    Delete
-                </button>
-                <x-delete action="{{ route('posts.destroy',[$post['id']]) }}"></x-delete>
+                <x-delete action="{{ route('posts.destroy',[$post['id']]) }}"  id="{{ $post->id }}"></x-delete>
                 @endif
             </td>
         </tr>

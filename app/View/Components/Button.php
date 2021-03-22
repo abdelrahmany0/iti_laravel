@@ -28,7 +28,7 @@ class Button extends Component
         return view('components.button',
         [
             'type' => $this->type,
-            'href' => $this->href
+            'href' => $this->href,
         ]);
 
     }
