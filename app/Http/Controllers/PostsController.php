@@ -58,10 +58,10 @@ class PostsController extends Controller
     }
 
     public function update(Request $request ,$post_id){
+        $post = Post::find($post_id);
         // dd($post_id);
         $request->validate([
-            'title'         => ['required' ,'min:3' ],
-            Rule::unique('posts')->ignore(Post::find($post_id)->title),
+            'title'         => ['required' ,'min:3', 'unique:posts,'.$post->id],
             'description'   => ['required' ,'min:5']
         ]);
         

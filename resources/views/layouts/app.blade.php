@@ -26,8 +26,13 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
             <div class="container">
+            @auth
                 <a href="{{ route('posts.index') }}" class="navbar-brand bg-secondary p-2 rounded-lg">All posts</a>
-                <a href="/" class="navbar-brand">Laravel</a>
+            @endauth
+            @if (Route::has('login'))
+            <a href="/" class="navbar-brand">Laravel</a>
+            @endif
+
                 <!-- <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a> -->
