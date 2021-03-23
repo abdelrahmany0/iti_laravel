@@ -25,10 +25,12 @@ create post
     <div class="input-group mb-3">
     <label>Choose a picture:</label>
     <input type="file" class="form-control-file" name="image" accept="image/*">
+    </div>
     <div class="w-100">
         <label>Post Creator:</label>
         <select name="user_id" class="form-control">
             <option selected disabled>Select a name:</option>
+            <option value="">--none</option>
             @foreach ($users as $user)
             <option value="{{ $user['id'] }}">{{ $user['name'] }}</option>
             @endforeach

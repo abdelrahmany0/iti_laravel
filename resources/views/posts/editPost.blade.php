@@ -12,7 +12,7 @@ edit post
         </ul>
     </div>
 @endif
-<form method="POST" action="{{ route('posts.update',[$post->id]) }}">
+<form method="POST" action="{{ route('posts.update',[$post->id]) }}"  enctype="multipart/form-data">
     <input type="hidden" name="_method" value="PUT" />
     @csrf
     <div class="form-group">
@@ -22,6 +22,10 @@ edit post
     <div class="form-group">
         <label>Description:</label>
         <textarea name="description" class="form-control" rows="3">{{ $post->description }}</textarea>
+    </div>
+    <div class="input-group mb-3">
+    <label>Choose a picture:</label>
+    <input type="file" value="{{ $post->image }}" class="form-control-file" name="image" accept="image/*">
     </div>
     <label>Post Creator:</label>
     <select name="user_id" class="form-control">

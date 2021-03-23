@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class PostController extends Controller
@@ -36,18 +35,13 @@ class PostController extends Controller
         ]);
     }
 
-    public function store(Request $request){
-        // dd($request->title);
-        $request->validate([
-            'title'         => ['required' ,'min:3' ,'unique:posts'],
-            'description'   => ['required' ,'min:5'],
-            'image'         => ['image'],
-        ]);
+    public function store(StorePostRequest $request){
+        // dd($request);
+
         $requestData = $request->all();
         if(isset($requestData['image'])) { 
             $image_name = $request->file('image')->getClientOriginalName();
-            $path = $request->file('image')->storeAs('/public/posts', $image_name);
-            // $path = $request->file('image')->storePubliclyAs('posts',$image_name);
+            $request->file('image')->storeAs('/public/posts', $image_name);
             $requestData['image'] = $image_name;
         }
         Post::create($requestData);
@@ -65,17 +59,23 @@ class PostController extends Controller
 
     public function update(Request $request ,$post_id){
         $post = Post::find($post_id);
-        // dd($post_id);
+        dd($request);
         $request->validate([
             'title'         => ['required' ,'min:3', 'exists:posts,title','unique:posts,title,'.$post->id],
-            'description'   => ['required' ,'min:5']
+            'description'   => ['required' ,'min:5'],
+            'image'         => ['image']
         ]);
-        
+        $image_name = null;
+        if( $request->file('image') != null ) { 
+            $image_name = $request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('/public/posts', $image_name);
+        }
         Post::where('id', $post_id)
         ->update([
             'title'         => $request['title'],
             'description'   => $request['description'],
             'user_id'       => $request['user_id'],
+            'image'         => $image_name ? $image_name : NULL
             ]);
             return redirect()->route('posts.index');
     }

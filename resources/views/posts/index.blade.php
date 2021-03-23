@@ -25,8 +25,17 @@ all posts
             <td>{{ $post->title }}</td>
             <td>{{ $post->slug }}</td>
             <td>{{ $post->user ? $post->user->name : 'user not found' }}</td>
-            <!-- <td>{{ $post->image ? $post->image : 'image not found' }}</td> -->
-            <td><img src="{{ asset('storage/posts/'.$post->image) }}" alt="" width="100px" height="100px"></td>
+            @if ($post->trashed())
+            <td><p>no image found</p></td>
+            @else
+            <td>
+                @if ($post->image)
+                <img src="{{ asset('storage/posts/'.$post->image) }}" alt="" width="80px" height="80px">
+                @else
+                <p>no image found</p>
+                @endif
+            </td>
+            @endif
             <td>{{ $post->created_at->format("Y-m-d") }}</td>
             <td>
                 @if ($post->trashed())
