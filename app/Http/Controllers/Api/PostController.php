@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
@@ -11,7 +11,7 @@ class PostController extends Controller
 {
     public function index(){
         // dd('in index');
-        $posts = Post::all();
+        $posts = Post::withTrashed()->get();
         return PostResource::collection($posts);
     }
 

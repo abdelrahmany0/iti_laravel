@@ -21,7 +21,7 @@ class PostController extends Controller
         ]);
     }
 
-    public function show_post($post_id){
+    public function show($post_id){
         //old way
         // $post = Post::find($post_id);
         return view('posts.showPost',
@@ -46,9 +46,9 @@ class PostController extends Controller
         $requestData = $request->all();
         if(isset($requestData['image'])) { 
             $image_name = $request->file('image')->getClientOriginalName();
-            // $path = $request->file('image')->storeAs('public/posts', $image_name);
-            $path = $request->file('image')->storePubliclyAs('public/posts',$image_name);
-            $requestData['image'] = $path;
+            $path = $request->file('image')->storeAs('/public/posts', $image_name);
+            // $path = $request->file('image')->storePubliclyAs('posts',$image_name);
+            $requestData['image'] = $image_name;
         }
         Post::create($requestData);
         return redirect()->route('posts.index');
