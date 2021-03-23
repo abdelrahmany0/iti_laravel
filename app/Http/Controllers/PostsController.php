@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class PostsController extends Controller
@@ -35,12 +37,20 @@ class PostsController extends Controller
     }
 
     public function store(Request $request){
+        // dd($request->title);
         $request->validate([
             'title'         => ['required' ,'min:3' ,'unique:posts'],
-            'description'   => ['required' ,'min:5']
+            'description'   => ['required' ,'min:5'],
+            'image'         => ['image'],
         ]);
         $requestData = $request->all();
-        // dd($requestData);
+        if(isset($requestData['image'])) { 
+            $image_name = $request->file('image')->getClientOriginalName();
+            // $path = $request->file('image')->storeAs('public/posts', $image_name);
+            $path = $request->file('image')->storePubliclyAs('public/posts',$image_name);
+            $requestData['image'] = $path;
+        }
+        // dd();
         Post::create($requestData);
         return redirect()->route('posts.index');
     }
@@ -61,7 +71,7 @@ class PostsController extends Controller
         $post = Post::find($post_id);
         // dd($post_id);
         $request->validate([
-            'title'         => ['required' ,'min:3', 'unique:posts,title,'.$post->id],
+            'title'         => ['required' ,'min:3', 'exists:posts,title','unique:posts,title,'.$post->id],
             'description'   => ['required' ,'min:5']
         ]);
         

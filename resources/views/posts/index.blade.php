@@ -13,6 +13,7 @@ all posts
             <th scope="col">Title</th>
             <th scope="col">Slug</th>
             <th scope="col">Posted By</th>
+            <th scope="col">Image</th>
             <th scope="col">Created At</th>
             <th scope="col">Actions</th>
         </tr>
@@ -24,6 +25,8 @@ all posts
             <td>{{ $post->title }}</td>
             <td>{{ $post->slug }}</td>
             <td>{{ $post->user ? $post->user->name : 'user not found' }}</td>
+            <td>{{ $post->image ? $post->image : 'image not found' }}</td>
+            <!-- <td><img src="{{ $post->image }}" alt="" width="100px" height="100px"></td> -->
             <td>{{ $post->created_at->format("Y-m-d") }}</td>
             <td>
                 @if ($post->trashed())
