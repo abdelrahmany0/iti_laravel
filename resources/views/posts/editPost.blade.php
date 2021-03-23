@@ -17,21 +17,28 @@ edit post
     @csrf
     <div class="form-group">
         <label>Title:</label>
-        <input name="title" class="form-control" value="{{ $post['title'] }}">
+        <input name="title" class="form-control" value="{{ $post->title }}">
     </div>
     <div class="form-group">
         <label>Description:</label>
-        <textarea name="description" class="form-control" rows="3">{{ $post['description'] }}</textarea>
+        <textarea name="description" class="form-control" rows="3">{{ $post->description }}</textarea>
     </div>
     <label>Post Creator:</label>
     <select name="user_id" class="form-control">
-        @foreach ($users as $one)
-        @if ($one['name'] === $user->name)
-        <option selected value="{{ $user['id'] }}">{{ $one['name'] }}</option>
-        @else
-        <option value="{{ $user['id'] }}">{{ $one['name'] }}</option>
-        @endif
+    @if ($post->user)
+        @foreach ($users as $user)
+            @if ($user->name === $post->user->name)
+            <option selected value="{{ $user->id }}">{{ $user->name }}</option>
+            @else
+            <option value="{{ $user->id }}">{{ $user->name }}</option>
+            @endif
         @endforeach
+    @else
+    <option selected value="">--none</option>
+    @foreach ($users as $user)
+            <option value="{{ $user->id }}">{{ $user->name }}</option>
+        @endforeach
+    @endif
     </select>
     <button type="submit" class="btn btn-primary mt-2">Update</button>
 </form>

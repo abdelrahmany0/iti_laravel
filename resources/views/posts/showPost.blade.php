@@ -24,6 +24,7 @@ show post
             </div>
         </div>
     </div>
+    @if ($post->user)
     <div class="card mt-2">
         <div class="card-header bg-secondary">
                 <h6>Post Creator Info</h6>
@@ -40,5 +41,16 @@ show post
                 </div>
             </div>
     </div>
+    @else
+    <div class="card mt-2">
+        <div class="card-header bg-secondary">
+                <h6>Post Creator Info</h6>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title text-bold">Unknown</h5>
+            </div>
+    </div>
+    @endif
+
 </div>
 @endsection

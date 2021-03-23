@@ -1,5 +1,7 @@
 {
     "cSpell.words": [
+        "Authenticatable",
+        "Laravel",
         "csrf",
         "endauth",
         "endforeach",

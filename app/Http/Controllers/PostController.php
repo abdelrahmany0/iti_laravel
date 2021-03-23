@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
-class PostsController extends Controller
+class PostController extends Controller
 {
     public function index(){
         //old way
@@ -50,19 +50,15 @@ class PostsController extends Controller
             $path = $request->file('image')->storePubliclyAs('public/posts',$image_name);
             $requestData['image'] = $path;
         }
-        // dd();
         Post::create($requestData);
         return redirect()->route('posts.index');
     }
 
     public function edit($post_id){
         // dd($request);
-        $user_post = Post::find($post_id);
-        $post_user_id = $user_post->user_id;
         return view('posts.editPost',
         [
             'post'  => Post::find($post_id),
-            'user'  => User::find($post_user_id),
             'users' => User::all()
         ]);
     }

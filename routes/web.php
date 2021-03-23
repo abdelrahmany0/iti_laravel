@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostsController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -18,14 +18,14 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {return view('welcome');});
 
 Route::group(['middleware' => 'auth'],function () {
-    Route::get('/posts' , [PostsController::class, 'index'])->name('posts.index');
-    Route::get('/posts/create' , [PostsController::class, 'create'])->name('posts.create');
-    Route::post('/posts' , [PostsController::class, 'store'])->name('posts.store');
-    Route::get('/posts/{post}' , [PostsController::class, 'show_post'])->name('posts.show');
-    Route::get('/posts/{post}/edit' , [PostsController::class, 'edit'])->name('posts.edit');
-    Route::put('/posts/{post}' , [PostsController::class, 'update'])->name('posts.update');
-    Route::delete('/posts/{post}' , [PostsController::class, 'destroy'])->name('posts.destroy');
-    Route::post('/posts/{post}' , [PostsController::class, 'restore'])->name('posts.restore');
+    Route::get('/posts' , [PostController::class, 'index'])->name('posts.index');
+    Route::get('/posts/create' , [PostController::class, 'create'])->name('posts.create');
+    Route::post('/posts' , [PostController::class, 'store'])->name('posts.store');
+    Route::get('/posts/{post}' , [PostController::class, 'show_post'])->name('posts.show');
+    Route::get('/posts/{post}/edit' , [PostController::class, 'edit'])->name('posts.edit');
+    Route::put('/posts/{post}' , [PostController::class, 'update'])->name('posts.update');
+    Route::delete('/posts/{post}' , [PostController::class, 'destroy'])->name('posts.destroy');
+    Route::post('/posts/{post}' , [PostController::class, 'restore'])->name('posts.restore');
 });
 
 Auth::routes();
