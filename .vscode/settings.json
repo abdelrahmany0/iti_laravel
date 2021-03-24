@@ -6,6 +6,7 @@
         "endauth",
         "endforeach",
         "endguest",
+        "endisset",
         "endsection"
     ]
 }

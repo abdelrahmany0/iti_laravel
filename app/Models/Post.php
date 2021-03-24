@@ -18,6 +18,7 @@ class Post extends Model
      *
      * @return array
      */
+
     public function sluggable(): array
     {
         return [
@@ -26,12 +27,18 @@ class Post extends Model
             ]
         ];
     }
+
     protected $fillable = [
         'title',
         'description',
         'user_id',
         'image'
     ];
+
+    public function SetImageAttribute($value){
+        $this->attributes['image'] = $value;
+    }
+
     public function user(){
         return $this->belongsTo(User::class);
     }
