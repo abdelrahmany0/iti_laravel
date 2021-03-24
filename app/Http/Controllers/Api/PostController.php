@@ -20,13 +20,7 @@ class PostController extends Controller
         return new PostResource($post);
     }
 
-
     public function store(StorePostRequest $request){
-        $request->validate([
-            'title'         => ['required' ,'min:3' ,'unique:posts'],
-            'description'   => ['required' ,'min:5'],
-            'image'         => ['image'],
-        ]);
         $post = Post::create($request->all());
         return new PostResource($post);
     }

@@ -35,6 +35,11 @@ class Post extends Model
         'image'
     ];
 
+    public function getIdAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
     public function setImageAttribute($value){
         $this->attributes['image'] = $value;
     }

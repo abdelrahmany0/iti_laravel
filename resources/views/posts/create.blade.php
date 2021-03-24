@@ -29,7 +29,7 @@ create post
     <div class="w-100">
         <label>Post Creator:</label>
         <select name="user_id" class="form-control">
-            <option selected disabled>Select a name:</option>
+            <option selected disabled value="">Select a name:</option>
             <option value="">--none</option>
             @foreach ($users as $user)
             <option value="{{ $user['id'] }}">{{ $user['name'] }}</option>

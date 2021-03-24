@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -21,12 +22,13 @@ class PostController extends Controller
         ]);
     }
 
-    public function show($post_id){
+    public function show(Post $post){
         //old way
         // $post = Post::find($post_id);
+        // dd($post);
         return view('posts.showPost',
         [
-            'post' => Post::find($post_id),
+            'post' => $post,
         ]);
     }
 
@@ -39,25 +41,19 @@ class PostController extends Controller
     public function store(StorePostRequest $request){
         // dd($request);
         $post = new Post;
-        $requestData = $request->all();
-        $post->title = $requestData['title'];
-        $post->description = $requestData['description'];
-        $post->description = $requestData['description'];
-        // dd($post);
-        // dd($requestData);
-        if( isset($requestData['user_id']) ){
-            $post->user_id = $requestData['user_id'];
+        $post->title = $request->title;
+        $post->description = $request->description;
+        if( isset($request->user_id) ){
+            $post->user_id = $request->user_id;
         }
-        if(isset($requestData['image'])) { 
-            $image_name = $request->file('image')->getClientOriginalName();
-            $request->file('image')->storeAs('/public/posts', $image_name);
-            // $requestData['image'] = $image_name;
-            // Post::find($requestData->id)->image = $image_name;
-            $post->image = $image_name;
+        if( $request->hasFile('image') ) { 
+            $img_name = $request->file('image')->getClientOriginalName();
+            // if( isset($request->user_id) ){ $image_name = $post->user->id.'-'.$img_name; }
+            $request->file('image')->storeAs('/public/posts',$img_name);
+            $post->image = $img_name;
         }
         // dd($post);
         $post->save();
-        // Post::create($requestData);
         return redirect()->route('posts.index');
     }
 
@@ -74,18 +70,17 @@ class PostController extends Controller
         ]);
     }
 
-    public function update(Request $request ,$post_id){
+    public function update(UpdatePostRequest $request ,$post_id){
         // dd($request);
         $post = Post::find($post_id);
-        $request->validate([
-            'title'         => ['required' ,'min:3', 'exists:posts,title','unique:posts,title,'.$post->id],
-            'description'   => ['required' ,'min:5'],
-            'image'         => ['image']
-        ]);
         $image_name = NULL;
-        if( $request->file('image') != null ) { 
+        
+        if( $request->hasFile('image') ) { 
+            // dd('image yes');
             $image_name = $request->file('image')->getClientOriginalName();
-            $request->file('image')->storeAs('/public/posts', $image_name);
+            $request->file('image')->storeAs(
+                '/public/posts', 
+                $post->user?$post->user->id:'' .'-'.$image_name);
         }
         Post::where('id', $post_id)
         ->update([

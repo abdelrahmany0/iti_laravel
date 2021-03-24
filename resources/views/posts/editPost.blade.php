@@ -29,6 +29,7 @@ edit post
     </div>
     <label>Post Creator:</label>
     <select name="user_id" class="form-control">
+    <option selected value="">--none</option>
     @if ($post->user)
         @foreach ($users as $user)
             @if ($user->name === $post->user->name)
@@ -38,7 +39,6 @@ edit post
             @endif
         @endforeach
     @else
-    <option selected value="">--none</option>
     @foreach ($users as $user)
             <option value="{{ $user->id }}">{{ $user->name }}</option>
         @endforeach
