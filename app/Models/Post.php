@@ -35,7 +35,7 @@ class Post extends Model
         'image'
     ];
 
-    public function SetImageAttribute($value){
+    public function setImageAttribute($value){
         $this->attributes['image'] = $value;
     }
 
