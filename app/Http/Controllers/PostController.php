@@ -32,7 +32,7 @@ class PostController extends Controller
             'post'      => $post,
             'users'     => User::all(),
             'results'  => Comment::all()
-                            ->where('commentable_id', '=', $post->id),
+                            ->where('post_id', '=', $post->id),
         ]);
     }
 

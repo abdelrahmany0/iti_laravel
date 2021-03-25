@@ -67,10 +67,10 @@ show post
     </div>
 @endif
 @foreach ($post->comments as $comment)
-<li class="list-group-item">{{ $comment->description }}</li>
-@isset($comment->user_id)
-<li class="list-group-item">{{ $comment->commentable->user_id }}</li>
-@endisset
+<li class="list-group-item">
+{{ $comment->description}}
+</li>
+<p>Commented by: {{$comment->user->name}}</p>
 @endforeach
 </div>
 
