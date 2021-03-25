@@ -35,6 +35,11 @@ class Post extends Model
         'image'
     ];
 
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+
     public function getIdAttribute($value)
     {
         return ucfirst($value);

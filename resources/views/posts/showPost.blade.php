@@ -22,6 +22,7 @@ show post
             </div>
         </div>
     </div>
+    <!-- USER INFO SECTION -->
     @if ($post->user)
     <div class="card mt-2">
         <div class="card-header bg-secondary">
@@ -43,12 +44,54 @@ show post
     <div class="card mt-2">
         <div class="card-header bg-secondary">
                 <h6>Post Creator Info</h6>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title text-bold">Unknown</h5>
-            </div>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title text-bold">Unknown</h5>
+        </div>
     </div>
     @endif
 
+    <!-- COMMENTS SECTION -->
+
+<div class="card mt-2">
+<div class="card-header bg-secondary">
+    <h6>Comments</h6>
+</div>
+@if ($errors->any())
+    <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+    </div>
+@endif
+@foreach ($post->comments as $comment)
+<li class="list-group-item">{{ $comment->description }}</li>
+@isset($comment->user_id)
+<li class="list-group-item">{{ $comment->commentable->user_id }}</li>
+@endisset
+@endforeach
+</div>
+
+    <form method="POST" action="{{ route('comments.store',[$post->id]) }}">
+    @csrf
+        <input type="text" hidden>
+        <div class="form-group">
+            <label>Comment:</label>
+            <textarea name="comment" class="form-control w-50" rows="3"></textarea>
+        </div>
+        <div class="w-100">
+            <label>Comment Creator:</label>
+            <select name="user_id" class="form-control">
+                <option selected disabled value="">Select a name:</option>
+                <option value="">--none</option>
+                @foreach ($users as $user)
+                <option value="{{ $user['id'] }}">{{ $user['name'] }}</option>
+                @endforeach
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Add comment</button>
+    </form>
 </div>
 @endsection

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,7 @@ Route::group(['middleware' => 'auth'],function () {
     Route::put('/posts/{post_id}' , [PostController::class, 'update'])->name('posts.update');
     Route::delete('/posts/{post}' , [PostController::class, 'destroy'])->name('posts.destroy');
     Route::post('/posts/{post}' , [PostController::class, 'restore'])->name('posts.restore');
+    Route::post('/posts/{post_id}/comments' , [CommentController::class, 'store'])->name('comments.store');
 });
 
 Auth::routes();
