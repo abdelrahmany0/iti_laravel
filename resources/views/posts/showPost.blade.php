@@ -62,7 +62,7 @@ show post
 <li class="list-group-item">
 {{ $comment->description}}
 </li>
-<p>Commented by: {{$comment->user->name}}</p>
+<p class="px-4">Commented by: {{$comment->user->name}}</p>
 @endforeach
 
 </div>
@@ -78,7 +78,6 @@ show post
 
     <form method="POST" action="{{ route('comments.store',[$post->id]) }}">
     @csrf
-        <input type="text" hidden>
         <div class="form-group">
             <label>Comment:</label>
             <textarea name="comment" class="form-control w-50" rows="3"></textarea>

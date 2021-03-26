@@ -28,7 +28,6 @@ Route::group(['middleware' => 'auth'],function () {
     Route::delete('/posts/{post}' , [PostController::class, 'destroy'])->name('posts.destroy');
     Route::post('/posts/{post}' , [PostController::class, 'restore'])->name('posts.restore');
     Route::post('/posts/{post_id}/comments' , [CommentController::class, 'store'])->name('comments.store');
-    Route::get('/api/posts/{post_id}' , [CommentController::class, 'show'])->name('comments.store');
 
 });
 
