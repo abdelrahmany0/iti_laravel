@@ -25,7 +25,7 @@ class StoreCommentRequest extends FormRequest
     {
         return [
             'comment'         => ['required' ,'min:3'],
-            // 'post_'       => ['exists:users,id','nullable']
+            'user_id'       => ['exists:users,id'],
         ];
     }
 }

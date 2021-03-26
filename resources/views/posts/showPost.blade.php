@@ -57,6 +57,15 @@ show post
 <div class="card-header bg-secondary">
     <h6>Comments</h6>
 </div>
+
+@foreach ($post->comments as $comment)
+<li class="list-group-item">
+{{ $comment->description}}
+</li>
+<p>Commented by: {{$comment->user->name}}</p>
+@endforeach
+
+</div>
 @if ($errors->any())
     <div class="alert alert-danger">
             <ul>
@@ -66,13 +75,6 @@ show post
             </ul>
     </div>
 @endif
-@foreach ($post->comments as $comment)
-<li class="list-group-item">
-{{ $comment->description}}
-</li>
-<p>Commented by: {{$comment->user->name}}</p>
-@endforeach
-</div>
 
     <form method="POST" action="{{ route('comments.store',[$post->id]) }}">
     @csrf
@@ -84,8 +86,7 @@ show post
         <div class="w-100">
             <label>Comment Creator:</label>
             <select name="user_id" class="form-control">
-                <option selected disabled value="">Select a name:</option>
-                <option value="">--none</option>
+                <option selected value="null">Select a name:</option>
                 @foreach ($users as $user)
                 <option value="{{ $user['id'] }}">{{ $user['name'] }}</option>
                 @endforeach
