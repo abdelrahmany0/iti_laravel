@@ -17,6 +17,8 @@ class PostController extends Controller
     }
 
     public function show(Post $post){
+        // $x = new PostResource($post);
+        // $x = $x->toJson();
         return new PostResource($post);
     }
 
