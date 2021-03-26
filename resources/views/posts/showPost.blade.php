@@ -78,8 +78,8 @@ show post
 
     <form method="POST" action="{{ route('comments.store',[$post->id]) }}">
     @csrf
-        <div class="form-group">
-            <label>Comment:</label>
+        <div class="form-light">
+            <label class="bg-light">Write Comment:</label>
             <textarea name="comment" class="form-control w-50" rows="3"></textarea>
         </div>
         <div class="w-100">
